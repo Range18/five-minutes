@@ -5,6 +5,8 @@ export class CreateTaskDto {
 
   description?: string;
 
+  importance?: string;
+
   project?: string;
 
   type: string;

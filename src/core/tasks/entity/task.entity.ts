@@ -28,12 +28,15 @@ export class TaskEntity {
   @Column({ nullable: true })
   description?: string;
 
-  @ManyToOne(() => Project, (project) => project.tasks, { nullable: true })
-  @JoinColumn({ name: 'projectId' })
-  project?: Project;
+  @Column({ nullable: true })
+  importance?: string;
 
   @Column({ nullable: false })
   type: string;
+
+  @ManyToOne(() => Project, (project) => project.tasks, { nullable: true })
+  @JoinColumn({ name: 'projectId' })
+  project?: Project;
 
   @Column({ nullable: true })
   expireAt?: Date;

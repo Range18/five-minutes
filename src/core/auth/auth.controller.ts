@@ -18,7 +18,7 @@ export class AuthController {
   ): Promise<LoggedUserRdo> {
     const userRdo = await this.authService.register(createUserDto);
 
-    response.cookie('refreshToken', userRdo.refreshToken, {
+    response.cookie('token', userRdo.refreshToken, {
       expires: userRdo.sessionExpireAt,
       secure: backendServer.secure,
       httpOnly: true,
@@ -34,7 +34,7 @@ export class AuthController {
   ): Promise<LoggedUserRdo> {
     const userRdo = await this.authService.login(loginUserDto);
 
-    response.cookie('refreshToken', userRdo.refreshToken, {
+    response.cookie('token', userRdo.refreshToken, {
       expires: userRdo.sessionExpireAt,
       secure: backendServer.secure,
       httpOnly: true,
@@ -46,10 +46,10 @@ export class AuthController {
   @Delete('logout')
   async logout(
     @Res({ passthrough: true }) response: Response,
-    @Cookie('refreshToken') refreshToken: string,
+    @Cookie('token') refreshToken: string,
   ): Promise<void> {
     await this.authService.logout(refreshToken);
 
-    response.clearCookie('refreshToken');
+    response.clearCookie('token');
   }
 }

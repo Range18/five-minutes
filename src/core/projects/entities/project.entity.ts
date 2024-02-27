@@ -26,12 +26,12 @@ export class Project {
   tasks: TaskEntity[];
 
   @ManyToOne(() => UserEntity, (user) => user.projects, { nullable: false })
-  @JoinColumn({ name: 'userId' })
+  @JoinColumn({ name: 'user' })
   user: UserEntity;
 
   @CreateDateColumn()
   createdAt: Date;
 
   @UpdateDateColumn()
-  updatedAt: string;
+  updatedAt: Date;
 }

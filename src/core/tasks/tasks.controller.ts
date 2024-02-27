@@ -19,14 +19,15 @@ export class TasksController {
       user: { uuid: user.uuid },
       title: createTaskDto.title,
       description: createTaskDto.description,
-      project: createTaskDto.project,
+      importance: createTaskDto.importance,
+      project: { uuid: createTaskDto.project },
       type: createTaskDto.type,
       expireAt: createTaskDto.expireAt,
     });
   }
 
   @AuthGuard()
-  @Get()
+  @Get('/me')
   async getUserTasks(@User() user: UserRequest) {
     return await this.tasksService.find({
       where: { user: { uuid: user.uuid } },

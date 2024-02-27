@@ -25,12 +25,6 @@ export class UserEntity {
   @Column({ nullable: false })
   password: string;
 
-  @UpdateDateColumn()
-  readonly updatedAt: Date;
-
-  @CreateDateColumn()
-  readonly createdAt: Date;
-
   @OneToMany(() => TaskEntity, (task) => task.user)
   tasks?: TaskEntity[];
 
@@ -39,4 +33,10 @@ export class UserEntity {
 
   @OneToMany(() => SessionEntity, (session) => session.user)
   sessions: SessionEntity[];
+
+  @UpdateDateColumn()
+  readonly updatedAt: Date;
+
+  @CreateDateColumn()
+  readonly createdAt: Date;
 }

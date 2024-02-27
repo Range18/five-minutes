@@ -32,9 +32,11 @@ export class ProjectsController {
   }
 
   @AuthGuard()
-  @Get()
-  findAllForUser(@User() user: UserRequest) {
-    return this.projectsService.find({ where: { user: { uuid: user.uuid } } });
+  @Get('/me')
+  async findAllForUser(@User() user: UserRequest) {
+    return await this.projectsService.find({
+      where: { user: { uuid: user.uuid } },
+    });
   }
 
   @AuthGuard()
