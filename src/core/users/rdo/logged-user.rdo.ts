@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Exclude, Expose } from 'class-transformer';
 
 export class LoggedUserRdo {
@@ -7,6 +8,7 @@ export class LoggedUserRdo {
   @Exclude()
   readonly sessionExpireAt: Date;
 
+  @ApiProperty()
   readonly email: string;
 
   constructor(refreshToken: string, sessionExpireAt: Date, email: string) {

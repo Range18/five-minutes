@@ -7,10 +7,11 @@ import { TokenModule } from '../token/token.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskEntity } from './entity/task.entity';
 import { UserEntity } from '../users/user.entity';
+import { Project } from '../projects/entities/project.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([TaskEntity, UserEntity]),
+    TypeOrmModule.forFeature([TaskEntity, UserEntity, Project]),
     UserModule,
     SessionModule,
     TokenModule,

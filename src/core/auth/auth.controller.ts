@@ -6,8 +6,10 @@ import { LoggedUserRdo } from '../users/rdo/logged-user.rdo';
 import { backendServer, jwtConfig } from '../../common/configs/config';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { Cookie } from '../../common/decorators/cookie.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('auth')
+@ApiTags('Auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 

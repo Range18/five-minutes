@@ -3,9 +3,11 @@ import { User } from '../../common/decorators/User.decorator';
 import { UserRequest } from '../../common/types/user-request.type';
 import { AuthGuard } from '../../common/decorators/guards/authGuard.decorator';
 import { UserService } from './user.service';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('tasks')
-export class TasksController {
+@ApiTags('Users')
+@Controller('users')
+export class UsersController {
   constructor(private readonly userService: UserService) {}
 
   @AuthGuard()

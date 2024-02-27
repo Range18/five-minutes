@@ -13,8 +13,10 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { AuthGuard } from '../../common/decorators/guards/authGuard.decorator';
 import { UserRequest } from '../../common/types/user-request.type';
 import { User } from '../../common/decorators/User.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('projects')
+@ApiTags('Projects')
+@Controller('api/projects')
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 

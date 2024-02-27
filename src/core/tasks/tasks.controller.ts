@@ -4,8 +4,10 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { User } from '../../common/decorators/User.decorator';
 import { UserRequest } from '../../common/types/user-request.type';
 import { AuthGuard } from '../../common/decorators/guards/authGuard.decorator';
+import { ApiTags } from '@nestjs/swagger';
 
-@Controller('tasks')
+@ApiTags('Tasks')
+@Controller('api/tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
