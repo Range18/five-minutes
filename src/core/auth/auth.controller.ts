@@ -6,13 +6,14 @@ import { LoggedUserRdo } from '../users/rdo/logged-user.rdo';
 import { backendServer, jwtConfig } from '../../common/configs/config';
 import { LoginUserDto } from '../users/dto/login-user.dto';
 import { Cookie } from '../../common/decorators/cookie.decorator';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Auth')
 @Controller('api/auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiCreatedResponse({ type: LoggedUserRdo })
   @Post('register')
   async registration(
     @Res({ passthrough: true }) response: Response,
@@ -29,6 +30,7 @@ export class AuthController {
     return userRdo;
   }
 
+  @ApiOkResponse({ type: LoggedUserRdo })
   @Post('login')
   async login(
     @Res({ passthrough: true }) response: Response,
