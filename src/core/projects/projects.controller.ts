@@ -43,13 +43,13 @@ export class ProjectsController {
 
   @AuthGuard()
   @Get(':id')
-  async findOne(@Param('id') id: string) {
-    return await this.projectsService.findOne({ where: { uuid: id } });
+  async findOne(@Param('id') id: number) {
+    return await this.projectsService.findOne({ where: { id: id } });
   }
 
   @AuthGuard()
   @Delete(':id')
-  async remove(@Param('id') id: string) {
-    return await this.projectsService.removeOne({ where: { uuid: id } });
+  async remove(@Param('id') id: number) {
+    return await this.projectsService.removeOne({ where: { id: id } });
   }
 }

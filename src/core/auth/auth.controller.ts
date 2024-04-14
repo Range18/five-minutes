@@ -23,6 +23,7 @@ export class AuthController {
 
     response.cookie('token', userRdo.refreshToken, {
       expires: userRdo.sessionExpireAt,
+      sameSite: 'none',
       secure: backendServer.secure,
       httpOnly: true,
     });

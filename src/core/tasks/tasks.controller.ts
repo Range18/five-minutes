@@ -22,7 +22,7 @@ export class TasksController {
       title: createTaskDto.title,
       description: createTaskDto.description,
       importance: createTaskDto.importance,
-      project: { uuid: createTaskDto.project },
+      project: { id: createTaskDto.project },
       type: createTaskDto.type,
       expireAt: createTaskDto.expireAt,
     });
@@ -38,13 +38,13 @@ export class TasksController {
 
   @AuthGuard()
   @Get(':id')
-  async getTask(@Param('id') id: string) {
-    return await this.tasksService.findOne({ where: { uuid: id } });
+  async getTask(@Param('id') id: number) {
+    return await this.tasksService.findOne({ where: { id: id } });
   }
 
   @AuthGuard()
   @Delete(':id')
-  async removeTask(@Param('id') id: string) {
-    return await this.tasksService.removeOne({ where: { uuid: id } });
+  async removeTask(@Param('id') id: number) {
+    return await this.tasksService.removeOne({ where: { id: id } });
   }
 }

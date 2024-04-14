@@ -8,10 +8,11 @@ import { UserEntity } from '../users/user.entity';
 import { TokenModule } from '../token/token.module';
 import { SessionModule } from '../session/session.module';
 import { UserModule } from '../users/user.module';
+import { Note } from '../notes/entities/note.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Project, TaskEntity, UserEntity]),
+    TypeOrmModule.forFeature([Project, TaskEntity, UserEntity, Note]),
     TokenModule,
     SessionModule,
     UserModule,

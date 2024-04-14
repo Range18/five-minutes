@@ -5,15 +5,16 @@ import {
   Injectable,
 } from '@nestjs/common';
 import { AllExceptions } from '../exception-handler/exeption-types/all-exceptions';
-import SessionExceptions = AllExceptions.SessionExceptions;
-import UserExceptions = AllExceptions.UserExceptions;
-import AuthExceptions = AllExceptions.AuthExceptions;
 import { UserService } from '../../core/users/user.service';
 import { SessionService } from '../../core/session/session.service';
 import { TokenService } from '../../core/token/token.service';
 import { ApiException } from '../exception-handler/api-exception';
 import { TokenPayload } from '../../core/session/types/user.payload';
 import { Request } from 'express';
+import SessionExceptions = AllExceptions.SessionExceptions;
+import UserExceptions = AllExceptions.UserExceptions;
+import AuthExceptions = AllExceptions.AuthExceptions;
+import { jwtConfig } from '../configs/config';
 
 @Injectable()
 export class AuthGuardClass implements CanActivate {
@@ -38,7 +39,9 @@ export class AuthGuardClass implements CanActivate {
     }
 
     const payload: TokenPayload =
-      await this.tokenService.verifyAsync<TokenPayload>(accessToken);
+      await this.tokenService.verifyAsync<TokenPayload>(accessToken, {
+        secret: jwtConfig.secret,
+      });
 
     const user = await this.userService.findOne({
       where: { uuid: payload.userUUID },
@@ -79,7 +82,6 @@ export class AuthGuardClass implements CanActivate {
   }
 
   private extractToken(request: Request): string | null {
-    const token = request.cookies['refreshToken'] ?? null;
-    return token;
+    return request.cookies['token'] ?? null;
   }
 }

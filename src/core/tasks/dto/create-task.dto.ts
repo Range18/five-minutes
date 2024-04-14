@@ -12,7 +12,7 @@ export class CreateTaskDto {
   importance?: string;
 
   @ApiProperty()
-  project?: string;
+  project?: number;
 
   @ApiProperty()
   type: string;

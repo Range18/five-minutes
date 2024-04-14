@@ -10,11 +10,13 @@ import {
 } from 'typeorm';
 import { TaskEntity } from '../../tasks/entity/task.entity';
 import { UserEntity } from '../../users/user.entity';
+import { Note } from '../../notes/entities/note.entity';
+import { BaseEntity } from '../../../common/base.entity';
 
 @Entity()
-export class Project {
-  @PrimaryGeneratedColumn('uuid')
-  readonly uuid: string;
+export class Project extends BaseEntity {
+  @PrimaryGeneratedColumn('increment')
+  readonly id: number;
 
   @Column({ nullable: false })
   name: string;
@@ -29,9 +31,9 @@ export class Project {
   @JoinColumn({ name: 'user' })
   user: UserEntity;
 
-  @CreateDateColumn()
-  createdAt: Date;
-
-  @UpdateDateColumn()
-  updatedAt: Date;
+  @OneToMany(() => Note, (note) => note.project, {
+    nullable: true,
+    onDelete: 'CASCADE',
+  })
+  notes?: Note[];
 }

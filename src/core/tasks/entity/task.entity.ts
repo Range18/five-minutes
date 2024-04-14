@@ -12,8 +12,8 @@ import { Project } from '../../projects/entities/project.entity';
 
 @Entity('tasks')
 export class TaskEntity {
-  @PrimaryGeneratedColumn('uuid')
-  readonly uuid: string;
+  @PrimaryGeneratedColumn('increment')
+  readonly id: number;
 
   @ManyToOne(() => UserEntity, (user) => user.tasks, {
     nullable: false,
